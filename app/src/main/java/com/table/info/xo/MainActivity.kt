@@ -3,20 +3,14 @@ package com.table.info.xo
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.IdRes
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import com.table.info.xo.models.Map
 import com.table.info.xo.models.Step
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(){
-
-    /**
-     * Do toast for activity
-     */
-    fun Context.toast(message: CharSequence) =
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
     /**
      * Game map
@@ -26,7 +20,7 @@ class MainActivity : AppCompatActivity(){
     /**
      * Current Step
      */
-    private var step: Step = Step.PLAYER_1;
+    private var step: Step = Step.PLAYER_1
 
     /**
      * OnCreate
@@ -35,29 +29,34 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         buttonsInit()
+        player.text = step.toString()
     }
 
     /**
      * Init buttons actions
      */
     private fun buttonsInit() {
-        setButtonClickStep(R.id._1, 0)
-        setButtonClickStep(R.id._2, 1)
-        setButtonClickStep(R.id._3, 2)
-        setButtonClickStep(R.id._4, 3)
-        setButtonClickStep(R.id._5, 4)
-        setButtonClickStep(R.id._6, 5)
-        setButtonClickStep(R.id._7, 6)
-        setButtonClickStep(R.id._8, 7)
-        setButtonClickStep(R.id._9, 8)
+        setButtonClickStep(_1, 0)
+        setButtonClickStep(_2, 1)
+        setButtonClickStep(_3, 2)
+        setButtonClickStep(_4, 3)
+        setButtonClickStep(_5, 4)
+        setButtonClickStep(_6, 5)
+        setButtonClickStep(_7, 6)
+        setButtonClickStep(_8, 7)
+        setButtonClickStep(_9, 8)
     }
 
     /**
      * Restart game
      */
-    private fun gameInit() {
+    fun gameInit(v: View) {
         this.map = Map()
         this.step = Step.PLAYER_1
+        buttonsInit()
+        reset.isEnabled = false
+        winner.text = ""
+        player.text = step.toString()
     }
 
     /**
@@ -70,26 +69,32 @@ class MainActivity : AppCompatActivity(){
     /**
      * Do step
      */
-    private fun step(id: Int, @IdRes viewId: Int) {
-        val s = map.doStep(id, step);
+    private fun step(id: Int, view: Button) {
+        val result = map.doStep(id, step)
 
         when (step) {
-            Step.PLAYER_1 -> findViewById<Button>(viewId).text = "X"
-            Step.PLAYER_2 -> findViewById<Button>(viewId).text = "O"
+            Step.PLAYER_1 -> view.text = "X"
+            Step.PLAYER_2 -> view.text = "O"
         }
 
-        toast(s.toString());
+
+        
+        if (result) {
+            reset.isEnabled = true
+            winner.text = "${step} is victorious"
+        }
+
         step = if(step == Step.PLAYER_1) Step.PLAYER_2 else Step.PLAYER_1
-        displayPlayerStep(step.toString());
+        displayPlayerStep(step.toString())
 
     }
 
     /**
      * Easy connect button step click to function
      */
-    private fun setButtonClickStep(@IdRes viewId: Int, cellId: Int){
-        findViewById<Button>(viewId).text = ""
-        findViewById<Button>(viewId).setOnClickListener { step(cellId, viewId) };
+    private fun setButtonClickStep(view: Button, cellId: Int){
+        view.text = ""
+        view.setOnClickListener { step(cellId, view) }
     }
 
 }

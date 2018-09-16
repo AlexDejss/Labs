@@ -7,16 +7,23 @@
     android:layout_height="match_parent"
     tools:context="com.table.info.xo.MainActivity">
 
-    <TextView
-        android:text="player 1"
-        android:layout_width="wrap_content"
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/player"/>
-    <TextView
-        android:text="player 1 is victorious"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/winner"/>
+        android:orientation="horizontal">
+        <TextView
+            android:padding="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/player"/>
+        <TextView
+            android:padding="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/winner"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,6 +90,25 @@
             android:layout_weight="1"
             android:id="@+id/_9"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            android:textAllCaps="false"
+            android:enabled="false"
+            android:onClick="gameInit"/>
+
+    </LinearLayout>
+
+
+
 
 
 
