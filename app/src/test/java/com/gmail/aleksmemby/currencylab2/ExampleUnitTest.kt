@@ -1,4 +1,4 @@
-package com.table.info.xo
+package com.gmail.aleksmemby.currencylab2
 
 import org.junit.Test
 

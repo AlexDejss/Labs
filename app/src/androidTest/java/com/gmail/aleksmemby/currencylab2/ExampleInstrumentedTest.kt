@@ -1,4 +1,4 @@
-package com.table.info.xo
+package com.gmail.aleksmemby.currencylab2
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.table.info.xo", appContext.packageName)
+        assertEquals("com.gmail.aleksmemby.currencylab2", appContext.packageName)
     }
 }
