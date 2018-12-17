@@ -2,12 +2,6 @@ package com.gmail.aleksmemby.currencylab2
 
 import android.util.Log
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.stream.JsonReader
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
-import java.io.StringReader
 import java.net.URL
 import java.util.ArrayList
 

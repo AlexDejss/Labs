@@ -21,6 +21,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         loadInfo()
+        loadStorage()
+    }
+
+    private fun loadStorage() {
+        result_screen.adapter = CurrencyAdapter(TrainDBOperations(this).readStorage())
+        result_screen.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        progressBar.visibility = View.INVISIBLE
     }
 
     private fun loadInfo() {
@@ -29,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         doAsync{
             val loader = NbrbLoader(context, currencyCodes)
             val res = loader.start()
+            TrainDBOperations(context).saveCurrency(res)
             uiThread {
                 result_screen.adapter = CurrencyAdapter(res)
                 result_screen.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
